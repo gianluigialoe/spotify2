@@ -45,7 +45,7 @@ function Home() {
     return <p>Errore: {error}</p>;
   }
 
-  return (<Container className='align-content-end' style={{ width: '80%', height: '100vh', marginLeft: '55vh' }}>
+  return (<Container className='align-content-end bg-primary' style={{ width: '80%', height: '100vh', marginLeft: '55vh' }}>
 
 
       <Row className="justify-content-start">

@@ -1,3 +1,4 @@
+// App.js
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import MyNavbar from './components/myNavBar';
@@ -11,6 +12,9 @@ import image5 from '../src/assets/playerbuttons/Shuffle.png';
 import Home from './components/home';
 import Header from './components/header';
 import SpotySearch from './components/Artist';
+import SpotyDetails from './components/spotyDetails';
+
+
 
 function App() {
   return (
@@ -18,12 +22,15 @@ function App() {
       <div className="app-container d-flex flex-column" style={{ height: '100vh' }}>
         <MyNavbar img={logo} />
         <Header />
+        
 
         <Routes>
-          <Route path="/" element={<div className=""><Home /></div>} />
-          <Route path="/artist/:searchTerm" element={<SpotySearch />} /> {/* Aggiornato il percorso */}
+          <Route path="/" element={<Home />} />
+          <Route path="/:artist/:searchTerm/*" element={<SpotySearch />} />
+          <Route path="/spotyDetails/:id" element={<SpotyDetails />} />
         </Routes>
-
+ 
+       
         <Footer
           image1={image1}
           image2={image2}

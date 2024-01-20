@@ -29,7 +29,7 @@ const MyNavbar = ({ img }) => {
       </div>
 
       {/* Bottoni Accedi e Login */}
-      <div className='d-flex flex-column align-items-start mt-auto bg-primary'>
+      <div className='d-flex flex-column align-items-start mt-auto '>
         <div className="mb-2 d-flex flex-column m-3">
           <button className="btn btn-outline-light rounded-pill m-2" style={{ width: '200%' }}>
             Accedi

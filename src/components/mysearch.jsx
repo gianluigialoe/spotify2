@@ -7,8 +7,8 @@ const Search = () => {
 
   const handleSearch = async () => {
     try {
-      const response = await fetch(`
-        https://striveschool-api.herokuapp.com/api/deezer/search?q=${searchTerm}`,
+      const response = await fetch(
+        `https://striveschool-api.herokuapp.com/api/deezer/search?q=${searchTerm}`,
         {
           method: 'GET',
           headers: {
@@ -23,6 +23,7 @@ const Search = () => {
       }
 
       const data = await response.json();
+      console.log('Risposta della fetch:', data);
       navigate(`/artista/${searchTerm}`, { state: { searchResults: data.data } });
     } catch (error) {
       console.error('Errore nel recupero dei dati:', error);
@@ -44,7 +45,7 @@ const Search = () => {
             onChange={(e) => setSearchTerm(e.target.value)}
           />
         </label>
-        <button type="submit">Cerca</button>
+        <button type="submit">go</button>
       </form>
     </div>
   );
