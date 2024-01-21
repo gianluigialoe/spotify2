@@ -41,7 +41,7 @@ function SpotySearch() {
               </li>
             </ul>
             {/* Utilizza Link invece di <a> per la navigazione interna */}
-            <Link to={`/spotyDetails/${result.id}`}>
+            <Link to={`/spotyDetails/${result.album.id}`}>
               <img
                 className="img-fluid"
                 src={result.album.cover_medium}
@@ -50,7 +50,7 @@ function SpotySearch() {
               />
             </Link>
             <div style={{ textAlign: 'center' }}>
-              <p style={{ fontWeight: 'bold', fontSize: '16px' }}>{result.title}</p>
+              <p style={{ fontWeight: 'bold', fontSize: '16px' }}>{result.Album}</p>
               <p>{result.album.title}</p>
             </div>
           </div>
@@ -61,9 +61,7 @@ function SpotySearch() {
       </div>
 
       {/* Aggiungi le rotte per SpotyDetails */}
-      <Routes>
-        <Route path="/:spotyDetails/:id" element={<SpotyDetails />} />
-      </Routes>
+  
     </div>
   );
 }

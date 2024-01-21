@@ -1,20 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { Image } from 'react-bootstrap';
 
-const SpotyDetails = () => {
+
+const SpotyDetails = ({ tracks }) => {
   const { id } = useParams();
   const [details, setDetails] = useState(null);
 
   useEffect(() => {
-    console.log('ID:', id); // Aggiunto console log per l'id
-
     const fetchDetails = async () => {
       try {
-        const response = await fetch(`https://striveschool-api.herokuapp.com/api/deezer/track/${id}`);
+        const response = await fetch(`https://deezerdevs-deezer.p.rapidapi.com/album/${encodeURIComponent(id)}`, {
+          headers: {
+            'X-RapidAPI-Key': 'eaeaee6824msh8f91d70e2444736p147278jsn4bcf449c05de',
+            'X-RapidAPI-Host': 'deezerdevs-deezer.p.rapidapi.com'
+          }
+        });
+
         if (response.ok) {
           const data = await response.json();
-          console.log('Dati della fetch:', data); // Aggiunto console log per la risposta della fetch
+          console.log('Dati della fetch:', data);
           setDetails(data);
         } else {
           console.error('Errore nella richiesta API');
@@ -26,27 +30,30 @@ const SpotyDetails = () => {
 
     fetchDetails();
   }, [id]);
-
-
   return (
     <div className="bg-primary" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100vh' }}>
       {details && (
-        <div>
-          <Image
-            src={details.album.cover_medium}
-            alt={details.title}
-            fluid
-            style={{ maxWidth: '500%', height: 'auto' }}
-          />
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          {details.artist && details.artist.picture && <img src={details.artist.picture} alt="Artist" style={{ width: '150px', height: '150px', objectFit: 'cover', marginRight: '20px' }} />}
           <div>
-            <p style={{ fontWeight: 'bold', fontSize: '16px', color: 'white' }}>{details.title}</p>
-            <p style={{ color: 'white' }}>{details.album.title}</p>
-            {/* Aggiungi altri dettagli se necessario */}
+            <p style={{ fontWeight: 'bold', fontSize: '20px', color: 'white' }}>{details.title || 'Title not available'}</p>
+            <div style={{ color: 'white', display: 'flex', flexDirection: 'column' }}>
+              {details.tracks.data && details.tracks.data.map((track, index) => (
+                <div key={index} style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
+                  <i className="bi bi-heart p-2" />
+                  <p style={{ marginLeft: '10px', fontSize: '14px' }}>{track.title}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       )}
     </div>
   );
+
+   
+
+
 };
 
 export default SpotyDetails;
